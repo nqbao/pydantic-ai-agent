@@ -2,14 +2,22 @@ from typing import List
 import httpx
 import os
 import dotenv
+import asyncio
 
 from pydantic_ai import Agent
 from pydantic_ai.settings import ModelSettings
+from pydantic_ai.models.openai import OpenAIModel
 
 dotenv.load_dotenv()
 
+model = OpenAIModel(
+    "gpt-4o",
+    api_key=os.environ.get("OPENAI_API_KEY"),
+    base_url=os.environ.get("OPENAI_BASE_URL")
+)
+
 research_agent = Agent(
-    "openai:gpt-4o",
+    model,
     model_settings=ModelSettings(max_tokens=1024, temperature=0),
     result_type=str,
     system_prompt=(
@@ -40,10 +48,10 @@ def search_google(query: str) -> List[str]:
 
     results = []
     for item in search_results["organic"]:
-        results.append(f"Title: {item['title']}\nSnippet: {item['snippet']}")
+        results.append(f"Title: {item['title']}\nSnippet: {item.get('snippet', 'n/a')}")
 
     return results
 
-
-result = research_agent.run_sync("What is the true range of Tesla Model Y Long Range?")
-print(result.data)
+if __name__ == "__main__":
+    result = research_agent.run_sync("What is Pydantic AI?")
+    print(result.data)

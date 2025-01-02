@@ -9,5 +9,5 @@ To start:
 export OPENAI_API_KEY=sk-....
 export SERPER_API_KEY=....
 
-uv run agent.py
+uv run streamlit run app.py
 ```
