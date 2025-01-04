@@ -2,7 +2,6 @@ from typing import List
 import httpx
 import os
 import dotenv
-import asyncio
 
 from pydantic_ai import Agent
 from pydantic_ai.settings import ModelSettings

@@ -1,6 +1,6 @@
 import streamlit as st
 import asyncio
-from agent import research_agent
+from agents.search_agent import research_agent
 
 async def main():
     st.title('Pydantic AI Agent')
