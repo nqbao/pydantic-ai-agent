@@ -1328,7 +1328,7 @@ requires-dist = [
     { name = "diskcache", specifier = ">=5.6.3" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "litellm", specifier = ">=1.53.3" },
-    { name = "pydantic-ai-slim", extras = ["openai"], specifier = ">=0.0.16" },
+    { name = "pydantic-ai-slim", extras = ["openai"], specifier = ">=0.0.18" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "streamlit", specifier = ">=1.41.1" },
     { name = "trafilatura", specifier = ">=2.0.0" },
@@ -1336,7 +1336,7 @@ requires-dist = [
 
 [[package]]
 name = "pydantic-ai-slim"
-version = "0.0.16"
+version = "0.0.18"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "eval-type-backport" },
@@ -1345,9 +1345,9 @@ dependencies = [
     { name = "logfire-api" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ce/e6/031c44f6b94d9ff0ff96f38dff82a1c94d766494ce08bb53096763d7f2d4/pydantic_ai_slim-0.0.16.tar.gz", hash = "sha256:c2dc82147e67ad928085c15e60f321db8995fcd9a6e4b83cbb52937bba77eeba", size = 59314 }
+sdist = { url = "https://files.pythonhosted.org/packages/f9/34/6cfa748877d4a2033383ca703b9ad465fd758aaf531908b75396d974371d/pydantic_ai_slim-0.0.18.tar.gz", hash = "sha256:0ef6c79fe1af4bd95ef3cf19bc4f566c30f3c21b658e3689a8f20fc7324212d0", size = 62533 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/27/b2/a5cd2bce9639d0f91e20bf92ffb6cc9b19abb3ad7d25a6cf2aaf909b2150/pydantic_ai_slim-0.0.16-py3-none-any.whl", hash = "sha256:14a0a814b55ce4ad271a8f9ece7e3746baeca8b0c742cc9a04f1ba8342cc4ceb", size = 78203 },
+    { url = "https://files.pythonhosted.org/packages/fa/86/d9a4e6afa945af30ded4295563db46b6b1a53b49672dfc1654cce6e9d838/pydantic_ai_slim-0.0.18-py3-none-any.whl", hash = "sha256:c2c513002a95c379b2581228f779c2a418c796f796a0a19a3250653707455ced", size = 82089 },
 ]
 
 [package.optional-dependencies]
