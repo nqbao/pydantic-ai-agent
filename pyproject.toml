@@ -5,8 +5,11 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "diskcache>=5.6.3",
     "httpx>=0.28.1",
-    "pydantic-ai-slim[openai]>=0.0.16",
+    "litellm>=1.53.3",
+    "pydantic-ai-slim[openai]>=0.0.18",
     "python-dotenv>=1.0.1",
     "streamlit>=1.41.1",
+    "trafilatura>=2.0.0",
 ]
