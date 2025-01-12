@@ -16,5 +16,8 @@
   },
   {
     "query": "is duckdb faster than polars"
+  },
+  {
+    "query": "Which teams are in the NFL playoffs 2025?"
   }
 ]
