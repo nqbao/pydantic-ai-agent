@@ -2,6 +2,9 @@ import streamlit as st
 import asyncio
 import dotenv
 import json
+
+dotenv.load_dotenv()
+
 from agents.search_agent import research_agent
 
 
@@ -29,5 +32,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    dotenv.load_dotenv()
     asyncio.run(main())
