@@ -25,7 +25,7 @@ async def main():
 
     if 'chat_result' in st.session_state:
         result = st.session_state['chat_result']
-        st.write(result.data)
+        st.write(result.output)
 
         if st.button("Show Message JSON"):
             show_message(json.loads(result.all_messages_json()))

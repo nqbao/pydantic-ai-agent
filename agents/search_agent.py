@@ -6,20 +6,14 @@ import trafilatura
 from pydantic import BaseModel
 from pydantic_ai import Agent, RunContext
 from pydantic_ai.settings import ModelSettings
-from pydantic_ai.models.openai import OpenAIModel
 
 from agents.qa_agent import qa_agent, NoAnswer, Answer
-
-model = OpenAIModel(
-    "gpt-4o",
-    api_key=os.environ.get("OPENAI_API_KEY"),
-    base_url=os.environ.get("OPENAI_BASE_URL")
-)
+from agents.models import main_model
 
 research_agent = Agent(
-    model,
+    main_model,
     model_settings=ModelSettings(max_tokens=1024, temperature=0),
-    result_type=str,
+    output_type=str,
     system_prompt=
         "Be a helpful a research agent and do your best to answer the given question, be precise."
         "Today year is 2025."
@@ -93,4 +87,4 @@ async def ask_website(ctx: RunContext, url: str, question: str) -> NoAnswer | An
 
 if __name__ == "__main__":
     result = research_agent.run_sync("Which teams are in the NFL playoffs 2025?")
-    print("Answer:", result.data)
+    print("Answer:", result.output)
