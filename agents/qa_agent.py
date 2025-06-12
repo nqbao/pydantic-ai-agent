@@ -10,7 +10,7 @@ class Answer(BaseModel):
 class NoAnswer(BaseModel):
     pass
 
-qa_agent = Agent(
+agent = Agent(
     main_model,
     model_settings=ModelSettings(max_tokens=1024, temperature=0),
     output_type=Answer | NoAnswer,

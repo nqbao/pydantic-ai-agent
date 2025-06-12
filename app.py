@@ -5,7 +5,7 @@ import json
 
 dotenv.load_dotenv()
 
-from agents.search_agent import research_agent
+from agents.search_agent import agent
 
 
 @st.dialog("Message JSON", width="large")
@@ -20,7 +20,7 @@ async def main():
 
     if st.button("Ask"):
         with st.spinner("Thinking..."):
-            result = await research_agent.run(question)
+            result = await agent.run(question)
             st.session_state['chat_result'] = result
 
     if 'chat_result' in st.session_state:

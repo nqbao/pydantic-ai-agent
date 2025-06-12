@@ -3,16 +3,19 @@ import httpx
 import os
 import trafilatura
 
-from pydantic import BaseModel
-from pydantic_ai import Agent, RunContext
+from pydantic_ai import Agent, RunContext, Tool
 from pydantic_ai.settings import ModelSettings
 
-from agents.qa_agent import qa_agent, NoAnswer, Answer
+from agents.qa_agent import agent as qa_agent, NoAnswer, Answer
 from agents.models import main_model
+from agents.tools import search_google
 
-research_agent = Agent(
+agent = Agent(
     main_model,
     model_settings=ModelSettings(max_tokens=1024, temperature=0),
+    tools=[
+        Tool(search_google, takes_ctx=False),
+    ],
     output_type=str,
     system_prompt=
         "Be a helpful a research agent and do your best to answer the given question, be precise."
@@ -22,45 +25,8 @@ research_agent = Agent(
     ,
 )
 
-class SearchResult(BaseModel):
-    title: str
-    url: str
-    snippet: str
 
-
-@research_agent.tool_plain
-async def search_google(query: str) -> List[SearchResult]:
-    """
-    Search the web for the given query and return the top results.
-
-    Args:
-        query: The query to search for.
-
-    Returns:
-        The top search results
-    """
-    api_key = os.getenv("SERPER_API_KEY")
-    assert api_key, "Please set API key for serper"
-
-    print("Searching for:", query)
-    search_results = httpx.get(
-        f"https://google.serper.dev/search?apiKey={api_key}&q={query}"
-    ).json()
-
-    results = []
-    for item in search_results["organic"]:
-        results.append(
-            SearchResult(
-                title=item["title"],
-                url=item.get("link"), 
-                snippet=item.get("snippet", "n/a")
-            )
-        )
-
-    return results
-
-
-@research_agent.tool
+@agent.tool
 async def ask_website(ctx: RunContext, url: str, question: str) -> NoAnswer | Answer:
     """
     Ask a question about a website to get the answer.
@@ -86,5 +52,5 @@ async def ask_website(ctx: RunContext, url: str, question: str) -> NoAnswer | An
 
 
 if __name__ == "__main__":
-    result = research_agent.run_sync("Which teams are in the NFL playoffs 2025?")
+    result = agent.run_sync("Which teams are in the NFL playoffs 2025?")
     print("Answer:", result.output)
